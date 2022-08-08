@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.heading{
+    text-align: center;
+}
+
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.card {
+    background-color: #DBD8ED;
+}
+
+.answer{
+    background-color: #DBD8ED;
+    border: 0px;
+}
+label {
+    display: inline-block;
+    width: 400px;
+    padding: 10px;
+    border: solid 2px #312E46;
+    transition: all 0.3s;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked+label {
+    border: solid 2px #FF2C2C ;
+}
