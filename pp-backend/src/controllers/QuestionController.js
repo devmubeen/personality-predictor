@@ -10,6 +10,7 @@ export class QuestionController {
         this.questionService = new QuestionService();
         /* API Methods */
         this.fetchQuestions = this.fetchQuestions.bind(this);
+        this.postQuestion = this.postQuestion.bind(this);
 
     }
 
@@ -17,6 +18,24 @@ export class QuestionController {
         try {
             this.questionService.getQuestions().then((questions) => {
                 new ResponseHandler(res).handleResponse(true, API_RESPONSE_MESSAGES.REQUEST_SUCCESS, questions);
+            }).catch((error) => {
+                console.log(error.message);
+                new ResponseHandler(res).handleResponse(false, error.message, null, HTTP_CODES["BAD REQUEST"]);
+            });
+
+        } catch (error) {
+            console.log('Generic Error', error);
+            new ResponseHandler(res).handleResponse(false, API_RESPONSE_MESSAGES.GENERIC_ERROR, null, HTTP_CODES["BAD REQUEST"]);
+        }
+
+    }
+
+    postQuestion(req, res){
+
+        try {
+            let body = this.utils.parseBody(req);
+            this.questionService.insertQuestion(body).then((resp) => {
+                new ResponseHandler(res).handleResponse(true, API_RESPONSE_MESSAGES.RESOURCE_CREATED, resp, HTTP_CODES.RESOURCE_CREATED);
             }).catch((error) => {
                 console.log(error.message);
                 new ResponseHandler(res).handleResponse(false, error.message, null, HTTP_CODES["BAD REQUEST"]);

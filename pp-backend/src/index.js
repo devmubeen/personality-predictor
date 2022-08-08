@@ -8,12 +8,16 @@ import { port, allowedDomains, bodyLimit, cookieSecret } from './configuration/e
 import { DefaultController } from "./controllers/DefaultController";
 import Middleware from "./middlewares";
 import Api from './routes';
+import { MongoConnecter } from './utilities/MongoConnector';
 
 
 export class Main {
 
     constructor() {
-        
+
+        this.dbConnecter = new MongoConnecter();
+        this.dbConnecter.getClient();
+
         let app = express();
         app.set("port", port);
         app.use(bodyParser.json({ limit: bodyLimit }));

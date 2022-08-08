@@ -1,5 +1,6 @@
+import Question from "../models/Question";
 import { Utils } from "../utilities/Utils";
-import questions from '../data/questions.json';
+
 
 export class QuestionService {
 
@@ -9,7 +10,21 @@ export class QuestionService {
     }
 
     async getQuestions() {
-        return questions;
+
+        let questionsData = await Question.getModel()
+            .find()
+            .select('-options.type -__v')
+            .lean(true);
+
+        return questionsData;
+    }
+
+    async insertQuestion(body) {
+
+        let insertation = await Question.getModel().create(body);
+        return insertation;
+
+
     }
 
 }

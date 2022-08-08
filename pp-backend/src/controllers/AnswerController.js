@@ -3,21 +3,21 @@ import { API_RESPONSE_MESSAGES, HTTP_CODES } from "../utilities/AppConstants";
 import { ResponseHandler } from "../utilities/ResponseHandler";
 import { Utils } from "../utilities/Utils";
 
-export class AController {
+export class AnswerController {
 
     constructor() {
         this.utils = new Utils();
         this.answerService = new AnswerService();
         /* API Methods */
-        this.submitAnswer = this.submitAnswer.bind(this);
+        this.processPersonalityAnswers = this.processPersonalityAnswers.bind(this);
 
     }
 
-    submitAnswer(req, res) {
+    processPersonalityAnswers(req, res) {
         try {
             let body = this.utils.parseBody(req);
-            this.answerService.insertAnswer(body).then((data) => {
-                new ResponseHandler(res).handleResponse(true, API_RESPONSE_MESSAGES.REQUEST_SUCCESS, data);
+            this.answerService.processPersonalityType(body).then((resp) => {
+                new ResponseHandler(res).handleResponse(true, API_RESPONSE_MESSAGES.REQUEST_SUCCESS, resp);
             }).catch((error) => {
                 console.log(error.message);
                 new ResponseHandler(res).handleResponse(false, error.message, null, HTTP_CODES["BAD REQUEST"]);

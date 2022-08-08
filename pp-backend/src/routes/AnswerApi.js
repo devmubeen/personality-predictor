@@ -1,19 +1,19 @@
 'use strict';
 import { Router } from "express";
+import { AnswerController } from "../controllers/AnswerController";
 import { QuestionController } from "../controllers/QuestionController";
 import Middleware from "../middlewares";
 
 
-export default class QuestionApi {
+export default class AnswerApi {
     constructor() {
-        this.questionController = new QuestionController();
+        this.answerController = new AnswerController();
         this.router = Router();
         this.registerRoutes();
     }
 
     registerRoutes() {
-        this.router.get('/', Middleware.log, this.questionController.fetchQuestions);
-        this.router.post('/', Middleware.log, this.questionController.postQuestion);
+        this.router.post('/personality', Middleware.log, this.answerController.processPersonalityAnswers);
     }
 
     getRouter() {
@@ -21,6 +21,6 @@ export default class QuestionApi {
     }
 
     getRouteGroup() {
-        return '/question';
+        return '/answer';
     }
 }

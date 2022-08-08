@@ -1,5 +1,6 @@
 'use strict';
 import { Router } from "express";
+import AnswerApi from "./AnswerApi";
 import QuestionApi from "./QuestionApi";
 
 
@@ -12,6 +13,7 @@ export default class Api {
 
     loadRouteGroups() {
         this.routeGroups.push(new QuestionApi());
+        this.routeGroups.push(new AnswerApi());
 
     }
 
