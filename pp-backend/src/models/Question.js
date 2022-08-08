@@ -10,9 +10,8 @@ export class User {
 
     getSchema(questionObject) {
         const schema = {
-            QuestionId : uuidv4(),
-            Question : questionObject.question,
-            Options: questionObject.options
+            question : questionObject.question,
+            options: questionObject.options
         }
         return schema;
     }

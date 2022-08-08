@@ -1,22 +1,23 @@
-import { QuestionService } from "../services/QuestionService";
+import { AnswerService } from "../services/AnswerService";
 import { API_RESPONSE_MESSAGES, HTTP_CODES } from "../utilities/AppConstants";
 import { ResponseHandler } from "../utilities/ResponseHandler";
 import { Utils } from "../utilities/Utils";
 
-export class QuestionController {
+export class AController {
 
     constructor() {
         this.utils = new Utils();
-        this.questionService = new QuestionService();
+        this.answerService = new AnswerService();
         /* API Methods */
-        this.fetchQuestions = this.fetchQuestions.bind(this);
+        this.submitAnswer = this.submitAnswer.bind(this);
 
     }
 
-    fetchQuestions(req, res) {
+    submitAnswer(req, res) {
         try {
-            this.questionService.getQuestions().then((questions) => {
-                new ResponseHandler(res).handleResponse(true, API_RESPONSE_MESSAGES.REQUEST_SUCCESS, questions);
+            let body = this.utils.parseBody(req);
+            this.answerService.insertAnswer(body).then((data) => {
+                new ResponseHandler(res).handleResponse(true, API_RESPONSE_MESSAGES.REQUEST_SUCCESS, data);
             }).catch((error) => {
                 console.log(error.message);
                 new ResponseHandler(res).handleResponse(false, error.message, null, HTTP_CODES["BAD REQUEST"]);

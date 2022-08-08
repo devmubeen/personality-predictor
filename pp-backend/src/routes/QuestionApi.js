@@ -4,7 +4,7 @@ import { QuestionController } from "../controllers/QuestionController";
 import Middleware from "../middlewares";
 
 
-export default class PromoCodeApi {
+export default class QuestionApi {
     constructor() {
         this.questionController = new QuestionController();
         this.router = Router();
@@ -12,7 +12,7 @@ export default class PromoCodeApi {
     }
 
     registerRoutes() {
-        this.router.post('/', Middleware.log, this.questionController.fetchQuestions);
+        this.router.get('/', Middleware.log, this.questionController.fetchQuestions);
     }
 
     getRouter() {
@@ -20,6 +20,6 @@ export default class PromoCodeApi {
     }
 
     getRouteGroup() {
-        return '/promocode';
+        return '/question';
     }
 }
