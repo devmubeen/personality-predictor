@@ -10,13 +10,6 @@ export class AnswerService {
     async processPersonalityType(body) {
 
         const { answers } = body;
-        /* const pipeline = [
-            {
-                $replaceRoot: { newRoot: { $mergeObjects: "$options" } }
-            },
-            { $project: { options: 0 } }
-        ] */
-
         const pipeline = [
             { $unwind: '$options' },
             { $project: { options: 1, _id: 0 } }
@@ -43,10 +36,10 @@ export class AnswerService {
 
         console.log(countIntrovert, countExtrovert);
         if(countIntrovert > countExtrovert){
-            return "Introvert"
+            return "I"
         }
         else{
-            return "Extrovert"
+            return "E"
         }
     }
 

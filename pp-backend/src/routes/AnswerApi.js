@@ -1,7 +1,6 @@
 'use strict';
 import { Router } from "express";
 import { AnswerController } from "../controllers/AnswerController";
-import { QuestionController } from "../controllers/QuestionController";
 import Middleware from "../middlewares";
 
 

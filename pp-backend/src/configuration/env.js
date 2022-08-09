@@ -8,7 +8,8 @@ export const env = process.env.ENV_TYPE;
 export const port = process.env.PORT;
 
 export const allowedDomains = [
-    'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop',
+    'http://localhost:4200'
 ];
 
 export const bodyLimit = '1000kb';
