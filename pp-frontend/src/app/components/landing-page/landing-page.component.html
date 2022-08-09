@@ -1,57 +1,52 @@
-<div class="heading">
-    <h1>Are You An Introvert Or Extrovert??
-    <br>
-    Find Out
-</h1>
-</div>
-
-
-<form class="container">
+<div class="container mt-3">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-sm-12">
+            <h4 class="text-center">Are You An Introvert Or Extrovert? Let's Play</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="question" id="question-1">
-                        <span class="question-index">Question 1/1</span>
-                        <h3 class="question-test">Question Content</h3>
-                        <ul class="answers list-group">
-                            <li class="answer list-group-item">
-                                <input type="radio" class="answer-input" id="answer1">
-                                <label class="answer-label" for="answer1">
-                                    <span class="answer-text">Answer 1 Content</span>
-                                </label>
-                            </li>
-                            <li class="answer list-group-item">
-                                <input type="radio" class="answer-input" id="answer2">
-                                <label class="answer-label" for="answer2">
-                                    <span class="answer-text">Answer 2 Content</span>
-                                </label>
-                            </li>
-                            <li class="answer list-group-item">
-                                <input type="radio" class="answer-input" id="answer3">
-                                <label class="answer-label" for="answer3">
-                                    <span class="answer-text">Answer 3 Content</span>
-                                </label>
-                            </li>
-                            <li class="answer list-group-item">
-                                <input type="radio" class="answer-input" id="answer4">
-                                <label class="answer-label" for="answer4">
-                                    <span class="answer-text">Answer 4 Content</span>
-                                </label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="d-grid gap-2 buttons">
-                        <button type="button" class="btn btn-outline-primary btn-lg text-dark">
+                    <ng-container *ngIf="!personalityType">
+                        <div id="{{selectedQuestionIndex + 1}}">
+                            <span class="question">Question {{selectedQuestionIndex + 1}}/{{questions.length}}</span>
+                            <h5 class="question">{{questions[selectedQuestionIndex]?.question}}</h5>
+                            <ul class="answers list-group">
+                                <ng-container *ngFor="let o of questions[selectedQuestionIndex]?.options">
+                                    <li class="answer list-group-item">
+                                        <input style="cursor: pointer;" [(ngModel)]="answer" value="{{o.answer}}"
+                                            type="radio" class="answer-input" name="options" id="{{o.answer}}">
+                                        <label style="cursor: pointer;" class="answer-label" for="{{o.answer}}">
+                                            <span class="answer-text">{{o.answer}}</span>
+                                        </label>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+
+                        <div class="d-grid gap-2 col-6 buttons">
+                            <button (click)="previousQuestion()" type="button" class="btn btn-secondary d-inline">
+                                <i class="fa-solid fa-angle-left"></i>
+                                Previous Question</button>
+                            <button (click)="nextQuestion()" type="button" class="btn btn-secondary d-inline">Next Question
+                                <i class="fa-solid fa-angle-right"></i>
+                            </button>
+                        </div>
+
+
+
+
+                    </ng-container>
+                    <ng-container *ngIf="personalityType">
+                        <h5 class="text-center">{{personalityType}}</h5>
+                        <button (click)="resetData()" type="button" class="btn btn-secondary d-inline">
                             <i class="fa-solid fa-angle-left"></i>
-                            Previous Question</button>
-                        <button type="button" class="btn btn-outline-primary btn-lg text-dark">Next Question
-                            <i class="fa-solid fa-angle-right"></i>
-                        </button>
-                    </div>
+                            Retake Test</button>
+                    </ng-container>
+
                 </div>
             </div>
         </div>
     </div>
-
-</form>
+</div>

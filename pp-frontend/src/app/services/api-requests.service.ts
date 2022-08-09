@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { ApiResponse } from '../models/response';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class ApiRequestService {
 
   postRequest(uri: string, data: any) {
     return this.http.post(`${this.BASE_URL}${uri}`, data).pipe(
-      map(response => {
+      map((response: any) => {
         return response;
       })
     );
@@ -21,7 +22,7 @@ export class ApiRequestService {
 
   getRequest(uri: string) {
     return this.http.get(`${this.BASE_URL}${uri}`).pipe(
-      map(response => {
+      map((response: any) => {
         return response;
       })
     );
